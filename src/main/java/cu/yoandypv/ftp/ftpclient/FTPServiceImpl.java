@@ -179,6 +179,7 @@ public class FTPServiceImpl implements FTPService {
                     }
                 }
             }
+            //存储文件
             try {
                 InputStream input = new FileInputStream(file);
                 this.ftpconnection.storeFile("" + serverFilename, input);

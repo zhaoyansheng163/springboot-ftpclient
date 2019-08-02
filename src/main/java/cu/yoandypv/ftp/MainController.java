@@ -24,6 +24,8 @@ public class MainController {
 
               ftpService.connectToFTP("192.168.101.144","app","app");
               //ftpService.makeDirectory("test120");
+
+              //serverPath 是相对于ftp用户家目录的相对目录
               ftpService.uploadFileToFTPByPath(new File("d:\\demo.lic"),"test37/test01/test02","demo11.lic");
               //ftpService.uploadFileToFTP(new File("d:\\demo.lic"),"/test01/","demo11.lic");
               //ftpService.downloadFileFromFTP("123.txt","d:\\123.txt");
