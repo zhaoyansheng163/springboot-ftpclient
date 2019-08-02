@@ -155,4 +155,43 @@ public class FTPServiceImpl implements FTPService {
             throw new FTPErrors(errorMessage);
         }
     }
+
+    /**
+     * Method for upload file to ftp.
+     * serverPath is the path of ftpServer es: test/test1/test2
+     * @throws FTPErrors Error if unplugged process failed.
+     */
+    @Override
+    public void uploadFileToFTPByPath(File file, String serverPath, String serverFilename) throws FTPErrors {
+        try {
+            //切换到上传目录
+            if (!this.ftpconnection.changeWorkingDirectory(serverPath)) {
+                //如果目录不存在创建目录
+                String[] dirs = serverPath.split("/");
+                for (String dir : dirs) {
+                    if (null == dir || "".equals(dir)) continue;
+                    if (!this.ftpconnection.changeWorkingDirectory(dir)) {
+                        if (!this.ftpconnection.makeDirectory(dir)) {
+
+                        } else {
+                            this.ftpconnection.changeWorkingDirectory(dir);
+                        }
+                    }
+                }
+            }
+            try {
+                InputStream input = new FileInputStream(file);
+                this.ftpconnection.storeFile("" + serverFilename, input);
+            } catch (IOException e) {
+                ErrorMessage errorMessage = new ErrorMessage(-5, "No se pudo subir el archivo al servidor.");
+                logger.error(errorMessage.toString());
+                throw new FTPErrors(errorMessage);
+            }
+
+        } catch (IOException e) {
+            ErrorMessage errorMessage = new ErrorMessage(-5, "Create Path or Store File error");
+            logger.error(errorMessage.toString());
+            throw new FTPErrors(errorMessage);
+        }
+    }
 }

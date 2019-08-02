@@ -13,5 +13,6 @@ public interface FTPService {
      void downloadFileFromFTP(String ftpRelativePath, String copytoPath) throws FTPErrors;
      void disconnectFTP() throws FTPErrors;
      boolean makeDirectory(String path) throws FTPErrors;
+     void uploadFileToFTPByPath(File file, String serverPath, String serverFilename) throws FTPErrors;
 
 }

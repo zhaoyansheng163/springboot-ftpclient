@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+
 /**
  * Created by Yoandy Pérez Villazón 14/09/17.
  */
@@ -21,7 +23,8 @@ public class MainController {
         try {
 
               ftpService.connectToFTP("192.168.101.144","app","app");
-              ftpService.makeDirectory("test120");
+              //ftpService.makeDirectory("test120");
+              ftpService.uploadFileToFTPByPath(new File("d:\\demo.lic"),"test37/test01/test02","demo11.lic");
               //ftpService.uploadFileToFTP(new File("d:\\demo.lic"),"/test01/","demo11.lic");
               //ftpService.downloadFileFromFTP("123.txt","d:\\123.txt");
 
