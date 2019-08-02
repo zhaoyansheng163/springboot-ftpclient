@@ -144,4 +144,15 @@ public class FTPServiceImpl implements FTPService {
             }
         }
     }
+
+    @Override
+    public boolean makeDirectory(String path) throws FTPErrors {
+        try {
+            return this.ftpconnection.makeDirectory(path);
+        } catch (IOException e) {
+            ErrorMessage errorMessage = new ErrorMessage(-5, "No se pudo subir el archivo al servidor.");
+            logger.error(errorMessage.toString());
+            throw new FTPErrors(errorMessage);
+        }
+    }
 }
